@@ -26,8 +26,11 @@ const Reserve = () => {
               <select
                 name=""
                 id=""
-                className="h-[68px] border-2 border-white bg-transparent px-2"
+                className="h-[68px] border-2 border-white bg-transparent px-2 font-Josefin text-xl"
               >
+                <option value="" defaultChecked>
+                  select
+                </option>
                 {locations.map((location, i) => (
                   <option key={i} value={location}>
                     {location}
@@ -45,6 +48,12 @@ const Reserve = () => {
               <input required type="date" placeholder="date" />
               <input required type="time" placeholder="time" />
             </div>
+            <textarea
+              name=""
+              id=""
+              placeholder="spaecial reqrests"
+              className="bg-transparent border-2 w-full h-[150px] resize-none p-3 text-white placeholder:capitalize placeholder:text-white2 font-Josefin text-xl"
+            ></textarea>
             <button className="mx-auto block bg-white px-8 py-4 font-Josefin text-2xl text-black">
               reserve a table
             </button>

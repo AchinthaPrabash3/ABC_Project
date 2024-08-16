@@ -4,23 +4,30 @@ import { useState } from "react";
 
 const ItemCard = ({ name, img, price, description, setCart }) => {
   const [value, setValue] = useState(1);
+
   const add = (e) => {
     e.preventDefault();
-    setValue((v) => v + 1);
+    if (value < 10) {
+      setValue((v) => v + 1);
+    }
   };
   const remove = (e) => {
     e.preventDefault();
-    setValue((v) => v - 1);
+    if (value > 1) {
+      setValue((v) => v - 1);
+    }
   };
+
   const addToCart = (e) => {
     e.preventDefault();
     setCart((d) => [
       ...d,
       {
-        name: "beef tacos (4)",
-        price: 500,
-        description: "Lorem Ipsum is that it has a more-or-less normal",
-        img: "https://images.pexels.com/photos/27590338/pexels-photo-27590338/free-photo-of-beet-carne-asada-tacos.jpeg?auto=compress&cs=tinysrgb&w=600",
+        name: name,
+        price: price,
+        description: description,
+        img: img,
+        amount: value,
       },
     ]);
   };
@@ -56,12 +63,16 @@ const ItemCard = ({ name, img, price, description, setCart }) => {
                 />
               </svg>
             </button>
-            <input
-              value={value}
-              readOnly
-              type="number"
-              className="size-[30px] rounded-md border-2 border-gold text-center font-cormorant text-3xl font-bold uppercase 2xl:size-[44px]"
-            />
+            <div className="size-[30px] 2xl:size-[44px] rounded-md border-2 border-gold overflow-hidden grid place-items-center">
+              <input
+                value={value}
+                readOnly
+                type="number"
+                min="1"
+                max="10"
+                className="w-fit leading-none bg-transparent text-center font-cormorant text-3xl font-bold uppercase outline-none cursor-pointer"
+              />
+            </div>
             <button onClick={remove}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

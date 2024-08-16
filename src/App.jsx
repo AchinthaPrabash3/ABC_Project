@@ -9,6 +9,7 @@ import ReservePage from "./pages/Reserve";
 
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import NavBar from "./components/NavBar";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -16,6 +17,7 @@ function App() {
   return (
     <>
       <Router>
+        <NavBar cart={cart} />
         <Routes>
           <Route path="/" element={<HomePage setCart={setCart} />} />
           <Route path="/about" element={<AboutPage />} />

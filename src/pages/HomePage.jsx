@@ -3,7 +3,6 @@
 import { Link } from "react-router-dom";
 import HeroSection from "../components/HeroSection";
 import ItemCard from "../components/ItemCard";
-import NavBar from "../components/NavBar";
 import OfferCard from "../components/OfferCard";
 import Reserve from "../components/ReserveForm";
 import { data } from "../data/DummyData";
@@ -12,7 +11,6 @@ import Footer from "../components/Footer";
 const HomePage = ({ setCart }) => {
   return (
     <div>
-      <NavBar />
       <HeroSection />
       <section className="pt-20 lg:pt-24 xl:pt-[140px]">
         <div className="flex flex-col items-center md:pb-12 xl:pb-[84px]">

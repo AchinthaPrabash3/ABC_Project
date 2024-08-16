@@ -24,7 +24,6 @@ const MenuPage = () => {
 
   return (
     <>
-      <NavBar />
       <PageTop name="our menu" />
       <MenuCard
         items={products}
