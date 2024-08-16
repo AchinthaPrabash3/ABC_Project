@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element={<HomePage setCart={setCart} />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/menu" element={<MenuPage />} />
-          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/shop" element={<ShopPage setCart={setCart} />} />
           <Route path="/reserve" element={<ReservePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/cart" element={<Cart data={cart} />} />

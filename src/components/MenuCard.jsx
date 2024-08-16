@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const MenuCard = ({ type, items, tags, image }) => {
+const MenuCard = ({ items, tags, image }) => {
   return (
     <section className="flex flex-col items-center justify-center gap-10 pb-[130px] lg:flex-row lg:items-start lg:py-[130px]">
       <div className="h-[500px] w-full lg:h-[600px] lg:w-[400px] 2xl:w-[553px]">
@@ -7,7 +7,7 @@ const MenuCard = ({ type, items, tags, image }) => {
       </div>
 
       <div className="flex w-full flex-col px-8 pr-4 md:px-24 lg:w-[500px] lg:px-0 2xl:h-[700px] 2xl:w-[834px]">
-        <h2 className="font-cormorant text-5xl font-bold capitalize">{type}</h2>
+        <h2 className="font-cormorant text-5xl font-bold capitalize">{tags}</h2>
         <ul className="mt-5 h-[500px] grow space-y-4 overflow-y-scroll lg:space-y-8">
           {items.map(({ name, description, price, tag, img }, i) => {
             if (tag == tags) {
