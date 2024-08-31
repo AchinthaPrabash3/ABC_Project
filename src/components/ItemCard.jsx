@@ -33,11 +33,11 @@ const ItemCard = ({ name, img, price, description, setCart }) => {
   };
 
   return (
-    <div className="w-[300px] 2xl:w-[406px]">
+    <div className="w-[300px] 2xl:w-[350px]">
       <img src={img} className="aspect-square w-full rounded-md" />
       <div className="mt-2 flex justify-between">
         <div className="*:leading-none">
-          <h3 className="font-cormorant text-3xl font-semibold capitalize leading-none 2xl:text-4xl 2xl:leading-none">
+          <h3 className="font-Josefin text-2xl font-semibold capitalize leading-none 2xl:text-4xl 2xl:leading-none">
             {name}
           </h3>
           <p className="font-cormorant text-xl font-bold leading-none text-custom2 2xl:text-2xl 2xl:leading-none">
@@ -63,7 +63,7 @@ const ItemCard = ({ name, img, price, description, setCart }) => {
                 />
               </svg>
             </button>
-            <div className="size-[30px] 2xl:size-[44px] rounded-md border-2 border-gold overflow-hidden grid place-items-center">
+            <div className="w-[44px] rounded-md border-2 border-gold overflow-hidden flex-none ">
               <input
                 value={value}
                 readOnly

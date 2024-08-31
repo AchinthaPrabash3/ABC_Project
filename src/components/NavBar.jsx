@@ -10,7 +10,7 @@ const NavBar = ({ cart }) => {
     navBar.classList.toggle("scale-y-0");
     setVisble((v) => !v);
   };
-  console.log(cart.length);
+
   return (
     <nav className="required: relative z-10 flex items-center justify-between border-b-4 border-gold bg-custom1 px-8 py-5 shadow-xl">
       <button
