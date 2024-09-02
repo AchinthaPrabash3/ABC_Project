@@ -13,6 +13,7 @@ const SignUp = () => {
     address: "",
     password: "",
     orders: [],
+    reserves: [],
   });
 
   const [success, setSuccess] = useState(false);

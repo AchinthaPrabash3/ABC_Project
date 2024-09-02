@@ -7,8 +7,16 @@ import OfferCard from "../components/OfferCard";
 import Reserve from "../components/ReserveForm";
 import { data } from "../data/DummyData";
 import Footer from "../components/Footer";
+import { MdOutlineDeliveryDining, MdOutlineMenuBook } from "react-icons/md";
+import { LiaCalendarDaySolid } from "react-icons/lia";
 
 const HomePage = ({ setCart }) => {
+  const offersData = [
+    { title: "open all week", icon: <LiaCalendarDaySolid /> },
+    { title: "diverse menu", icon: <MdOutlineMenuBook /> },
+    { title: "home delivery", icon: <MdOutlineDeliveryDining /> },
+  ];
+
   return (
     <div>
       <HeroSection />
@@ -51,9 +59,9 @@ const HomePage = ({ setCart }) => {
           </p>
         </div>
         <div className="grid w-fit gap-[40px] md:grid-cols-3">
-          <OfferCard />
-          <OfferCard />
-          <OfferCard />
+          {offersData.map((data, i) => (
+            <OfferCard key={i} {...data} />
+          ))}
         </div>
       </section>
       <Reserve />

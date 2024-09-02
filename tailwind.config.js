@@ -20,8 +20,10 @@ export default {
       },
       backgroundImage: {
         formbg: "url(./src/assets/formBg.jpg)",
+        aboutbg: "url(./src/assets/bg2.jpg)",
       },
     },
   },
-  plugins: ["daisyui"],
+
+  plugins: ["prettier-plugin-tailwindcss"],
 };

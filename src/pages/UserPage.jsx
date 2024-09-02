@@ -31,7 +31,6 @@ const UserPage = ({
           </div>
         </div>
         <div>
-          <button></button>
           <button
             onClick={() => {
               setIslogedin((l) => !l);

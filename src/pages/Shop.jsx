@@ -3,6 +3,7 @@ import { useEffect, useId, useState } from "react";
 import Footer from "../components/Footer";
 
 import ItemCard from "../components/ItemCard";
+import Reserve from "../components/ReserveForm";
 
 const ShopPage = ({ setCart }) => {
   const id = useId();
@@ -53,11 +54,11 @@ const ShopPage = ({ setCart }) => {
   return (
     <>
       <section>
-        <div className="py-12 flex flex-col items-center">
-          <h1 className="text-5xl uppercase font-cormorant font-bold mb-12">
+        <div className="flex flex-col items-center py-12">
+          <h1 className="mb-12 font-cormorant text-5xl font-bold uppercase">
             shop now
           </h1>
-          <div className="h-12 border-2 py-1 border-gold w-1/2 flex items-center px-2 rounded-full overflow-hidden">
+          <div className="flex h-12 w-1/2 items-center overflow-hidden rounded-full border-2 border-gold px-2 py-1">
             <label htmlFor={id + "search"}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -81,11 +82,11 @@ const ShopPage = ({ setCart }) => {
               type="search"
               value={search}
               id={id + "search"}
-              className="grow h-full outline-none pl-2 font-Josefin placeholder:capitalize placeholder:text-lg"
+              className="h-full grow pl-2 font-Josefin outline-none placeholder:text-lg placeholder:capitalize"
             />
             <select
               onChange={filter}
-              className="bg-main text-white h-full rounded-full px-3 capitalize font-cormorant text-lg"
+              className="h-full rounded-full bg-main px-3 font-cormorant text-lg capitalize text-white"
             >
               <option value="all" defaultChecked>
                 all
@@ -97,12 +98,13 @@ const ShopPage = ({ setCart }) => {
             </select>
           </div>
         </div>
-        <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 w-fit gap-8 mx-auto py-10 pb-20">
+        <div className="mx-auto grid w-fit grid-cols-2 gap-8 py-10 pb-20 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((data, i) => (
             <ItemCard setCart={setCart} key={i} {...data} />
           ))}
         </div>
       </section>
+      <Reserve />
       <Footer />
     </>
   );
