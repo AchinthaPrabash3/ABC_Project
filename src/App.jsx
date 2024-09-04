@@ -12,18 +12,27 @@ import { useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
 
 function App() {
+  const [cart, setCart] = useState([]);
   useEffect(() => {
     const data = window.sessionStorage.getItem("cartItems");
     if (data !== null) {
       setCart(JSON.parse(data));
     }
   }, []);
-  const [cart, setCart] = useState([]);
+
   useEffect(() => {
     if (cart.length !== 0) {
       window.sessionStorage.setItem("cartItems", JSON.stringify(cart));
     }
   }, [cart]);
+
+  const [saveToLocal, setSaveToLocal] = useState([]);
+
+  useEffect(() => {
+    if (saveToLocal.length !== 0) {
+      window.localStorage.setItem("orders", JSON.stringify(saveToLocal));
+    }
+  }, [saveToLocal]);
 
   return (
     <>
@@ -38,7 +47,14 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route
             path="/cart"
-            element={<Cart data={cart} setCart={setCart} />}
+            element={
+              <Cart
+                data={cart}
+                setCart={setCart}
+                setSaveToLocal={setSaveToLocal}
+                saveToLocal={saveToLocal}
+              />
+            }
           />
           <Route path="/signup" element={<SignupPage />} />
         </Routes>

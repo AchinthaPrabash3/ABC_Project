@@ -79,8 +79,8 @@ const LoginPage = () => {
       {isLogedin == false ? (
         <>
           <PageTop name="log in" />
-          <section className="w-[500px] bg-white2 border-2 border-gold mx-auto flex flex-col items-center py-7 my-6">
-            <div className="size-[100px] bg-main grid place-items-center rounded-full ">
+          <section className="mx-auto my-6 flex w-[500px] flex-col items-center border-2 border-gold bg-white2 py-7">
+            <div className="grid size-[100px] place-items-center rounded-full bg-main">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -96,14 +96,14 @@ const LoginPage = () => {
                 />
               </svg>
             </div>
-            <p className="px-5 text-sm text-center pt-5">
+            <p className="px-5 pt-5 text-center text-sm">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis
               illum, fugiat vitae minima eligendi dolor atque hic autem amet
               omnis quod,
             </p>
             <form
               action=""
-              className="[&_input]:h-12 [&_input]:border [&_input]:border-black [&_input]:px-3 [&_input]:placeholder:capitalize flex flex-col w-[400px] space-y-2 my-5 font-Josefin"
+              className="my-5 flex w-[400px] flex-col space-y-2 font-Josefin [&_input]:h-12 [&_input]:border [&_input]:border-black [&_input]:px-3 [&_input]:placeholder:capitalize"
             >
               <input
                 type="text"
@@ -119,12 +119,12 @@ const LoginPage = () => {
                 onChange={getData}
                 placeholder="enter your password"
               />
-              <button className="h-12 bg-gold  capitalize" onClick={login}>
+              <button className="h-12 bg-gold capitalize" onClick={login}>
                 sign in
               </button>
             </form>
             <Link to="/signup">
-              <button className="h-12 capitalize font-Josefin">sign up</button>
+              <button className="h-12 font-Josefin capitalize">sign up</button>
             </Link>
           </section>
         </>

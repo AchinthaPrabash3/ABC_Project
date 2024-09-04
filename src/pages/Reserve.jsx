@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import Footer from "../components/Footer";
 import PageTop from "../components/PageTop";
 import reserveImg from "../assets/reserveimg.webp";

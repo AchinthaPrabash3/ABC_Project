@@ -55,8 +55,6 @@ const Reserve = () => {
       window.alert("fill data");
     }
   };
-
-  console.log(reserveData);
   return (
     <section className="bg-formbg bg-cover">
       <div className="flex w-full items-center justify-center bg-main/50 py-[120px]">

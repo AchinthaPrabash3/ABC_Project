@@ -12,20 +12,20 @@ const UserPage = ({
   orders,
 }) => {
   const claer = () => {
-    window.sessionStorage.clear();
+    window.sessionStorage.removeItem("userData");
   };
   return (
     <section className="space-y-2 px-12">
-      <div className="flex justify-between items-center px-12 py-3 border-b-2 border-black">
+      <div className="flex items-center justify-between border-b-2 border-black px-12 py-3">
         <div className="flex items-center space-x-3">
-          <div className="bg-white1 border-2 border-gold w-fit rounded-full size-20 p-1">
+          <div className="bg-white1 size-20 w-fit rounded-full border-2 border-gold p-1">
             <img src={UserIcon} className="size-full" alt="" />
           </div>
           <div className="-space-y-1">
-            <h1 className="text-2xl font-cormorant font-bold capitalize">
+            <h1 className="font-cormorant text-2xl font-bold capitalize">
               <span className="font-light">wellcome</span> {username}
             </h1>
-            <p className="uppercase font-cormorant font-bold text-sm">
+            <p className="font-cormorant text-sm font-bold uppercase">
               {location}
             </p>
           </div>
@@ -36,7 +36,7 @@ const UserPage = ({
               setIslogedin((l) => !l);
               claer();
             }}
-            className="bg-gold *:stroke-white p-2 rounded"
+            className="rounded bg-gold p-2 *:stroke-white"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -59,8 +59,8 @@ const UserPage = ({
         {orders.length > 0 ? (
           <div></div>
         ) : (
-          <div className="w-full grid place-items-center h-[50dvh]">
-            <h2 className="uppercase font-bold text-slate-300 text-5xl">
+          <div className="grid h-[50dvh] w-full place-items-center">
+            <h2 className="text-5xl font-bold uppercase text-slate-300">
               no orders yet
             </h2>
           </div>
