@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useId, useState } from "react";
-import Footer from "../components/Footer";
 
 import ItemCard from "../components/ItemCard";
 import Reserve from "../components/ReserveForm";
@@ -105,7 +104,6 @@ const ShopPage = ({ setCart }) => {
         </div>
       </section>
       <Reserve />
-      <Footer />
     </>
   );
 };

@@ -1,4 +1,3 @@
-import Footer from "../components/Footer";
 import PageTop from "../components/PageTop";
 import reserveImg from "../assets/reserveimg.webp";
 import resimg from "../assets/resimg.jpg";
@@ -197,7 +196,6 @@ const ReservePage = () => {
           </div>
         </div>
       </section>
-      <Footer />
     </>
   );
 };

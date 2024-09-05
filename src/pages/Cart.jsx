@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import CartCard from "../components/CartItemCard";
-import Footer from "../components/Footer";
+
 import PageTop from "../components/PageTop";
+import TrackOrders from "../components/TrackOrders";
 
 const Cart = ({ data, setCart, setSaveToLocal }) => {
   const locations = ["galle", "matara", "gampaha", "columbo", "nuwara"];
@@ -71,11 +72,10 @@ const Cart = ({ data, setCart, setSaveToLocal }) => {
           console.log(data);
           return;
         }
-
-        if (data == true) {
+        if (Object.keys(data).length > 0) {
           window.alert("order placed successfuly");
           setSaveToLocal((s) => {
-            return [...s, orderData];
+            return [...s, data];
           });
           window.localStorage.setItem("orders", JSON.stringify(orderData));
           setorderData({
@@ -118,7 +118,6 @@ const Cart = ({ data, setCart, setSaveToLocal }) => {
           </h1>
           <form
             onSubmit={sendData}
-            action=""
             className="mt-3 flex w-[350px] flex-col space-y-2 [&_input]:h-12 [&_input]:border [&_input]:border-gold [&_input]:bg-transparent [&_input]:pl-2 [&_input]:placeholder:font-Josefin [&_input]:placeholder:capitalize"
           >
             <input
@@ -190,8 +189,14 @@ const Cart = ({ data, setCart, setSaveToLocal }) => {
           </form>
         </div>
       </section>
-
-      <Footer />
+      <section>
+        <p className="mt-4 border-b border-gold py-3 text-center text-3xl uppercase">
+          your orders
+        </p>
+        <div>
+          <TrackOrders />
+        </div>
+      </section>
     </>
   );
 };

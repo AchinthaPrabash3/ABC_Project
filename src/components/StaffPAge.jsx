@@ -23,28 +23,28 @@ const StaffPage = ({ setIsLogedinStaff }) => {
 
   useEffect(() => {
     const getOrders = async (e) => {
-      if (m.length > 0) {
-        try {
-          const res = await fetch("http://localhost:8080/stafforders", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(m),
-          });
-          const data = await res.json();
-          if (!res.ok) {
-            console.log(data);
-            return;
-          }
-
-          if (data.length !== 0) {
-            setOrders(data);
-          }
-        } catch (error) {
-          console.log(error);
+      try {
+        const res = await fetch("http://localhost:8080/stafforders", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(m),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          console.log(data);
+          return;
         }
+
+        if (data.length !== 0) {
+          setOrders(data);
+        }
+      } catch (error) {
+        console.log(error);
       }
     };
-    getOrders();
+    if (m.length > 0) {
+      getOrders();
+    }
   }, [m]);
 
   useEffect(() => {
@@ -69,7 +69,9 @@ const StaffPage = ({ setIsLogedinStaff }) => {
         console.log(error);
       }
     };
-    getReserves();
+    if (m.length > 0) {
+      getReserves();
+    }
   }, [m]);
 
   return (
@@ -105,10 +107,13 @@ const StaffPage = ({ setIsLogedinStaff }) => {
           </svg>
         </button>
       </div>
-      <div>
-        {orders.map((data, i) => (
-          <OrderCard key={i} {...data} />
-        ))}
+      <div className="flex gap-2 px-3 pt-5">
+        <div className="h-[600px] w-1/2 flex-none space-y-2 overflow-y-scroll pb-4">
+          {orders.map((data, i) =>
+            data.completed == false ? <OrderCard key={i} {...data} /> : "",
+          )}
+        </div>
+        <div className="h-12 w-1/2 bg-black"></div>
       </div>
     </div>
   );

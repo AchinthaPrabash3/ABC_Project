@@ -1,4 +1,3 @@
-import Footer from "../components/Footer";
 import PageTop from "../components/PageTop";
 import aboutHero from "../assets/aboutHero.jpg";
 import AboutCard from "../components/AboutCard";
@@ -45,10 +44,10 @@ const AboutPage = () => {
       <PageTop name="about us" />
       <section className="flex justify-center space-x-20 py-10">
         <div className="w-[400px]">
-          <p className="uppercase font-Josefin border-t border-b border-gold w-fit px-2 leading-none pt-1 text-sm">
+          <p className="w-fit border-b border-t border-gold px-2 pt-1 font-Josefin text-sm uppercase leading-none">
             about us
           </p>
-          <h1 className="text-4xl my-2 capitalize font-cormorant font-bold">
+          <h1 className="my-2 font-cormorant text-4xl font-bold capitalize">
             quality and tredition
           </h1>
           <p className="text-pretty text-sm">
@@ -66,25 +65,24 @@ const AboutPage = () => {
         </div>
         <img
           src={aboutHero}
-          className="w-1/3 h-[500px] object-cover rounded-tr-[150px]"
+          className="h-[500px] w-1/3 rounded-tr-[150px] object-cover"
           alt=""
         />
       </section>
-      <section className="flex justify-center bg-center bg-aboutbg bg-cover ">
-        <div className="flex justify-center divide-x-2 divide-white bg-black/60 w-full h-full py-12 backdrop-blur-md ">
+      <section className="flex justify-center bg-aboutbg bg-cover bg-center">
+        <div className="flex h-full w-full justify-center divide-x-2 divide-white bg-black/60 py-12 backdrop-blur-md">
           {aboutData.map((data, i) => {
             return <AboutCard key={i} {...data} />;
           })}
         </div>
       </section>
       <PageTop name="gallery" />
-      <section className="columns-4 space-y-2 w-1/2 mx-auto py-8">
+      <section className="mx-auto w-1/2 columns-4 space-y-2 py-8">
         {imageData.map((links, i) => (
-          <img key={i} src={links} className="w-full h-full object-cover" />
+          <img key={i} src={links} className="h-full w-full object-cover" />
         ))}
       </section>
       <Reserve />
-      <Footer />
     </>
   );
 };

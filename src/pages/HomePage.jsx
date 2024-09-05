@@ -6,7 +6,7 @@ import ItemCard from "../components/ItemCard";
 import OfferCard from "../components/OfferCard";
 import Reserve from "../components/ReserveForm";
 import { data } from "../data/DummyData";
-import Footer from "../components/Footer";
+
 import { MdOutlineDeliveryDining, MdOutlineMenuBook } from "react-icons/md";
 import { LiaCalendarDaySolid } from "react-icons/lia";
 
@@ -65,7 +65,6 @@ const HomePage = ({ setCart }) => {
         </div>
       </section>
       <Reserve />
-      <Footer />
     </div>
   );
 };

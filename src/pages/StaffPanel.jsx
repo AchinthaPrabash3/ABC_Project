@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import PageTop from "../components/PageTop";
-import Footer from "../components/Footer";
+
 import StaffPage from "../components/StaffPAge";
 
 const StaffPanel = () => {
@@ -51,6 +51,7 @@ const StaffPanel = () => {
       console.log(error);
     }
   };
+
   useEffect(() => {
     const data = window.sessionStorage.getItem("isLogedinStaff");
     if (data !== null) {
@@ -144,7 +145,6 @@ const StaffPanel = () => {
       ) : (
         <StaffPage setIsLogedinStaff={setIsLogedinStaff} />
       )}
-      <Footer />
     </>
   );
 };

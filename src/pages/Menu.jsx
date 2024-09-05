@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import Footer from "../components/Footer";
+
 import MenuCard from "../components/MenuCard";
 import NavBar from "../components/NavBar";
 import PageTop from "../components/PageTop";
@@ -43,7 +43,6 @@ const MenuPage = () => {
         tags="dessert"
       />
       <Reserve />
-      <Footer />
     </>
   );
 };

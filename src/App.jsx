@@ -11,6 +11,8 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
 import StaffPanel from "./pages/StaffPanel";
+import AdminPanal from "./pages/AdminPanal";
+import Footer from "./components/Footer";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -66,8 +68,10 @@ function App() {
           />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/staff" element={<StaffPanel cart={cart} />} />
+          <Route path="/admin" element={<AdminPanal />} />
         </Routes>
       </Router>
+      <Footer />
     </>
   );
 }

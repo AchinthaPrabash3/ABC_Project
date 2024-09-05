@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import Footer from "../components/Footer";
+
 import PageTop from "../components/PageTop";
 import { Link } from "react-router-dom";
 
@@ -181,7 +181,6 @@ const SignUp = () => {
           </Link>
         </section>
       )}
-      <Footer />
     </>
   );
 };

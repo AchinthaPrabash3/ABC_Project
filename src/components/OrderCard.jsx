@@ -30,7 +30,7 @@ const OrderCard = ({
     }
   };
   return (
-    <div className="w-[600px] rounded-md border border-main bg-white2 p-5">
+    <div className="w-full rounded-md border border-main bg-white2 p-5">
       <div className="flex items-center justify-between">
         <p className="font-light">
           <span className="font-bold uppercase">ID</span>:{_id}
@@ -76,7 +76,14 @@ const OrderCard = ({
       </div>
       <div>
         <p>total:{total}</p>
-        <button onClick={complete}>compleat</button>
+        <button
+          onClick={() => {
+            complete();
+            window.location.reload();
+          }}
+        >
+          compleat
+        </button>
       </div>
     </div>
   );
