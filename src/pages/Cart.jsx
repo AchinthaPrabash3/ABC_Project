@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 
 import { useEffect, useState } from "react";
@@ -15,9 +14,10 @@ const Cart = ({ data, setCart, setSaveToLocal }) => {
     address: "",
     phone: "",
     location: "",
+    completed: false,
     delivary: 300,
   });
-  const [subTotal, setSubtotal] = useState(100);
+  const [subTotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
   useEffect(() => {
     let sTotal = 0;
@@ -33,13 +33,12 @@ const Cart = ({ data, setCart, setSaveToLocal }) => {
       return {
         ...o,
         items: data,
-        total: subTotal,
+        total: total,
       };
     });
-  }, [data, subTotal]);
+  }, [data, total]);
 
   const getData = (e) => {
-    e.preventDefault();
     const { name, value } = e.target;
     setorderData((o) => {
       return {
@@ -49,7 +48,8 @@ const Cart = ({ data, setCart, setSaveToLocal }) => {
     });
   };
 
-  const sendData = async () => {
+  const sendData = async (e) => {
+    e.preventDefault();
     if (
       orderData.address !== "" &&
       orderData.email !== "" &&
@@ -85,6 +85,7 @@ const Cart = ({ data, setCart, setSaveToLocal }) => {
             address: "",
             phone: "",
             location: "",
+            completed: false,
             delivary: 300,
           });
           setCart([]);
@@ -116,6 +117,7 @@ const Cart = ({ data, setCart, setSaveToLocal }) => {
             delovary info
           </h1>
           <form
+            onSubmit={sendData}
             action=""
             className="mt-3 flex w-[350px] flex-col space-y-2 [&_input]:h-12 [&_input]:border [&_input]:border-gold [&_input]:bg-transparent [&_input]:pl-2 [&_input]:placeholder:font-Josefin [&_input]:placeholder:capitalize"
           >
@@ -155,37 +157,37 @@ const Cart = ({ data, setCart, setSaveToLocal }) => {
                 ))}
               </select>
             </div>
+            <hr className="mt-5" />
+            <div className="space-y-2 py-2 pt-3">
+              <div className="flex items-center justify-between space-x-2 px-1 *:font-Josefin">
+                <h2 className="text-sm uppercase">item count</h2>
+                <hr className="grow border-dashed border-white" />
+                <p>{data.length}</p>
+              </div>
+              <div className="flex items-center justify-between space-x-2 px-1 *:font-Josefin">
+                <h2 className="text-sm uppercase">sub total</h2>
+                <hr className="grow border-dashed border-white" />
+                <p>{subTotal}.Rs</p>
+              </div>
+              <div className="flex items-center justify-between space-x-2 px-1 *:font-Josefin">
+                <h2 className="text-sm uppercase">dilivary fee</h2>
+                <hr className="grow border-dashed border-white" />
+                <p>300 Rs</p>
+              </div>
+            </div>
+            <hr />
+            <div className="my-5 flex items-center justify-between space-x-2 px-1 *:font-Josefin">
+              <h2 className="text-sm uppercase">total</h2>
+              <hr className="grow border-dashed border-white" />
+              <p>{total} Rs</p>
+            </div>
+            <button
+              className="block h-14 w-full rounded-md border border-gold font-Josefin capitalize"
+              type="submit"
+            >
+              place order
+            </button>
           </form>
-          <hr className="mt-5" />
-          <div className="space-y-2 py-2 pt-3">
-            <div className="flex items-center justify-between space-x-2 px-1 *:font-Josefin">
-              <h2 className="text-sm uppercase">item count</h2>
-              <hr className="grow border-dashed border-white" />
-              <p>{data.length}</p>
-            </div>
-            <div className="flex items-center justify-between space-x-2 px-1 *:font-Josefin">
-              <h2 className="text-sm uppercase">sub total</h2>
-              <hr className="grow border-dashed border-white" />
-              <p>{subTotal}.Rs</p>
-            </div>
-            <div className="flex items-center justify-between space-x-2 px-1 *:font-Josefin">
-              <h2 className="text-sm uppercase">dilivary fee</h2>
-              <hr className="grow border-dashed border-white" />
-              <p>300 Rs</p>
-            </div>
-          </div>
-          <hr />
-          <div className="my-5 flex items-center justify-between space-x-2 px-1 *:font-Josefin">
-            <h2 className="text-sm uppercase">total</h2>
-            <hr className="grow border-dashed border-white" />
-            <p>{total} Rs</p>
-          </div>
-          <button
-            className="block h-14 w-full rounded-md border border-gold font-Josefin capitalize"
-            onClick={sendData}
-          >
-            place order
-          </button>
         </div>
       </section>
 

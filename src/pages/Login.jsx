@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import PageTop from "../components/PageTop";
 import { useEffect, useState } from "react";
-import UserPage from "./UserPage";
+import UserPage from "../components/UserPage";
 
 const LoginPage = () => {
   const [loginData, seLoginData] = useState({

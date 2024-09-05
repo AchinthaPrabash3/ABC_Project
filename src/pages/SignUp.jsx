@@ -12,8 +12,6 @@ const SignUp = () => {
     location: "select",
     address: "",
     password: "",
-    orders: [],
-    reserves: [],
   });
 
   const [success, setSuccess] = useState(false);
@@ -64,8 +62,8 @@ const SignUp = () => {
     <>
       <PageTop name="sign up" />
       {success ? (
-        <div className="flex flex-col items-center bg-white2 border-2 border-gold p-12 w-fit mx-auto my-10 font-Josefin">
-          <div className="size-[100px] bg-main grid place-items-center rounded-full">
+        <div className="mx-auto my-10 flex w-fit flex-col items-center border-2 border-gold bg-white2 p-12 font-Josefin">
+          <div className="grid size-[100px] place-items-center rounded-full bg-main">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -81,20 +79,20 @@ const SignUp = () => {
               />
             </svg>
           </div>
-          <p className="w-[400px] text-sm text-center pt-5">
+          <p className="w-[400px] pt-5 text-center text-sm">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis
             illum, fugiat vitae minima eligendi dolor atque hic autem amet omnis
             quod,
           </p>
           <Link to={"/login"}>
-            <button className="capitalize w-[400px] h-12 bg-gold text-black mt-8">
+            <button className="mt-8 h-12 w-[400px] bg-gold capitalize text-black">
               sign in
             </button>
           </Link>
         </div>
       ) : (
-        <section className="w-[700px] bg-white2 mx-auto border-2 border-gold flex flex-col items-center [&_input]:px-3 font-Josefin [&_input]:placeholder:capitalize my-12 py-12">
-          <div className="size-[100px] bg-main grid place-items-center rounded-full">
+        <section className="mx-auto my-12 flex w-[700px] flex-col items-center border-2 border-gold bg-white2 py-12 font-Josefin [&_input]:px-3 [&_input]:placeholder:capitalize">
+          <div className="grid size-[100px] place-items-center rounded-full bg-main">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -110,14 +108,14 @@ const SignUp = () => {
               />
             </svg>
           </div>
-          <p className="w-1/2 text-sm text-center pt-5">
+          <p className="w-1/2 pt-5 text-center text-sm">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis
             illum, fugiat vitae minima eligendi dolor atque hic autem amet omnis
             quod,
           </p>
           <form
             action=""
-            className="*:border *:border-black flex flex-col space-y-2 *:h-12 w-[450px] py-8"
+            className="flex w-[450px] flex-col space-y-2 py-8 *:h-12 *:border *:border-black"
           >
             <input
               type="emal"
@@ -135,7 +133,7 @@ const SignUp = () => {
               placeholder="enter your username"
               required
             />
-            <div className="flex border-none *:border *:w-1/2 gap-2 *:border-black">
+            <div className="flex gap-2 border-none *:w-1/2 *:border *:border-black">
               <input
                 placeholder="enter your phone number"
                 type="number"
@@ -172,14 +170,14 @@ const SignUp = () => {
             />
 
             <button
-              className="bg-gold border-none capitalize"
+              className="border-none bg-gold capitalize"
               onClick={sendData}
             >
               sign up
             </button>
           </form>
           <Link to={"/login"}>
-            <button className=" capitalize">sign in</button>
+            <button className="capitalize">sign in</button>
           </Link>
         </section>
       )}

@@ -10,6 +10,7 @@ import ReservePage from "./pages/Reserve";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
+import StaffPanel from "./pages/StaffPanel";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -27,6 +28,13 @@ function App() {
   }, [cart]);
 
   const [saveToLocal, setSaveToLocal] = useState([]);
+
+  useEffect(() => {
+    const data = window.localStorage.getItem("orders");
+    if (data !== null) {
+      setSaveToLocal(JSON.parse(data));
+    }
+  }, []);
 
   useEffect(() => {
     if (saveToLocal.length !== 0) {
@@ -57,6 +65,7 @@ function App() {
             }
           />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/staff" element={<StaffPanel cart={cart} />} />
         </Routes>
       </Router>
     </>
