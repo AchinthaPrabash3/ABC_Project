@@ -3,11 +3,15 @@
 
 import { useEffect, useState } from "react";
 import OrderCard from "./OrderCard";
+import RserveCard from "./ReserveCard";
 
 /* eslint-disable react/prop-types */
 const StaffPage = ({ setIsLogedinStaff }) => {
   const [orders, setOrders] = useState([]);
   const [reserves, setReserves] = useState([]);
+  const [completed, setCompleted] = useState([]);
+  const [pending, setPending] = useState([]);
+  const [total, setTotal] = useState([]);
   const [m, setm] = useState([]);
 
   useEffect(() => {
@@ -19,6 +23,15 @@ const StaffPage = ({ setIsLogedinStaff }) => {
       console.error("Failed to parse staffdata:", error);
       setm([]);
     }
+  }, []);
+  useEffect(() => {
+    setCompleted(orders.filter(({ completed }) => completed != false));
+    setPending(orders.filter(({ completed }) => completed != true));
+    let total = 0;
+    for (let i = 0; i < completed.length; i++) {
+      total += completed[i].total;
+    }
+    setTotal(total);
   }, []);
 
   useEffect(() => {
@@ -46,7 +59,6 @@ const StaffPage = ({ setIsLogedinStaff }) => {
       getOrders();
     }
   }, [m]);
-
   useEffect(() => {
     const getReserves = async () => {
       try {
@@ -73,7 +85,7 @@ const StaffPage = ({ setIsLogedinStaff }) => {
       getReserves();
     }
   }, [m]);
-
+  console.log(total);
   return (
     <div>
       <div className="flex items-center justify-between border-b-2 border-main px-12 py-4">
@@ -113,7 +125,9 @@ const StaffPage = ({ setIsLogedinStaff }) => {
             data.completed == false ? <OrderCard key={i} {...data} /> : "",
           )}
         </div>
-        <div className="h-12 w-1/2 bg-black"></div>
+        <div className="h-12 w-1/2">
+          <RserveCard />
+        </div>
       </div>
     </div>
   );

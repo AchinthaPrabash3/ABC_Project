@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PageTop from "../components/PageTop";
 
 import StaffPage from "../components/StaffPAge";
+import { LocationContext } from "../components/LocationContext";
 
 const StaffPanel = () => {
-  const locations = ["galle", "matara", "gampaha", "columbo", "nuwara"];
+  const locations = useContext(LocationContext);
   const [reseved, setReseved] = useState([]);
   const [isLogedinStaff, setIsLogedinStaff] = useState(false);
   const [staffLoginData, setStaffLoginData] = useState({

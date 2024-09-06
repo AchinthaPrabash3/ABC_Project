@@ -1,14 +1,15 @@
 import PageTop from "../components/PageTop";
 import reserveImg from "../assets/reserveimg.webp";
 import resimg from "../assets/resimg.jpg";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LuTruck } from "react-icons/lu";
 import { LiaPizzaSliceSolid } from "react-icons/lia";
 import { CiCircleCheck } from "react-icons/ci";
 import { AiOutlineHistory } from "react-icons/ai";
+import { LocationContext } from "../components/LocationContext";
 
 const ReservePage = () => {
-  const locations = ["galle", "matara", "gampaha", "columbo", "nuwara"];
+  const locations = useContext(LocationContext);
   const miniCardData = [
     { title: "fresh food", icon: <LiaPizzaSliceSolid /> },
     { title: "fast delivery", icon: <LuTruck /> },

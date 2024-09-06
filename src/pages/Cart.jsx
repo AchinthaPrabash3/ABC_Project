@@ -1,13 +1,14 @@
 /* eslint-disable react/prop-types */
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CartCard from "../components/CartItemCard";
 
 import PageTop from "../components/PageTop";
 import TrackOrders from "../components/TrackOrders";
+import { LocationContext } from "../components/LocationContext";
 
 const Cart = ({ data, setCart, setSaveToLocal }) => {
-  const locations = ["galle", "matara", "gampaha", "columbo", "nuwara"];
+  const locations = useContext(LocationContext);
   const [orderData, setorderData] = useState({
     items: [],
     total: 0,

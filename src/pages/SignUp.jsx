@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import PageTop from "../components/PageTop";
 import { Link } from "react-router-dom";
+import { LocationContext } from "../components/LocationContext";
 
 const SignUp = () => {
+  const locations = useContext(LocationContext);
   const [signupData, setSignupData] = useState({
     email: "",
     username: "",
@@ -146,10 +148,11 @@ const SignUp = () => {
                 <option value="select" defaultChecked>
                   --select--
                 </option>
-                <option value="galle">galle</option>
-                <option value="columbo">colombo</option>
-                <option value="gampaha">gampaha</option>
-                <option value="matara">matara</option>
+                {locations.map((data, i) => (
+                  <option value={data} key={i}>
+                    {data}
+                  </option>
+                ))}
               </select>
             </div>
             <input

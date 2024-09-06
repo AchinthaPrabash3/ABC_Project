@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { LocationContext } from "./LocationContext";
 
 const Reserve = () => {
-  const locations = ["galle", "matara", "gampaha", "columbo", "nuwara"];
+  const locations = useContext(LocationContext);
   const [reserveData, setReserveData] = useState({
     email: "",
     name: "",
