@@ -7,6 +7,9 @@ import DeleteLocation from "./DeleteLoc";
 import UpLocName from "./UpdateLocationName";
 import UpdateSeatCount from "./UpdateSeatCount";
 import UpdatePass from "./UpdatePassword";
+import AddNewProd from "./AddNewProd";
+import UpdateProd from "./UpdateProd";
+import DeleteProd from "./DeleteProd";
 
 /* eslint-disable react/prop-types */
 const AdminPage = ({ setIsAdminLogedin }) => {
@@ -73,6 +76,16 @@ const AdminPage = ({ setIsAdminLogedin }) => {
             <UpdateSeatCount />
             <UpdatePass />
           </div>
+        </div>
+      </section>
+      <section className="px-16">
+        <h2 className="text-center text-xl font-bold capitalize">
+          manage products
+        </h2>
+        <div className="mb-4 mt-4 flex">
+          <AddNewProd />
+          <UpdateProd />
+          <DeleteProd />
         </div>
       </section>
     </div>

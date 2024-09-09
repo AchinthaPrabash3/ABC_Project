@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 
 import { data } from "autoprefixer";
+import { useContext } from "react";
+import { SaveOrdersContext } from "./SaveToLocalContext";
 
 /* eslint-disable react/prop-types */
 const TrackOrderCard = ({
@@ -12,6 +14,7 @@ const TrackOrderCard = ({
   phone,
   address,
   completed,
+  location,
 }) => {
   const deleteOrder = async (e) => {
     try {
@@ -33,9 +36,8 @@ const TrackOrderCard = ({
       console.log(error);
     }
   };
-
   return (
-    <div className="w-[600px] rounded-lg border border-gold bg-main p-4 text-white">
+    <div className="w-full rounded-lg border border-gold bg-main p-4 text-white">
       <div className="flex items-center justify-between *:leading-none">
         <p className="font-Josefin text-lg font-thin">{email}</p>
         <p className="text-2xl font-bold uppercase">
@@ -43,6 +45,7 @@ const TrackOrderCard = ({
         </p>
       </div>
       <p className="-mt-1 mb-4 text-xs">{address}</p>
+      <p className="mb-1 text-sm font-thin uppercase">({location})</p>
       <div className="h-[120px] space-y-2 overflow-y-scroll pb-3">
         {items.map(({ name, price, amount }, i) => (
           <div

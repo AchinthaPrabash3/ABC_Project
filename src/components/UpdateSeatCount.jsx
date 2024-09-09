@@ -58,7 +58,6 @@ const UpdateSeatCount = () => {
       console.log(error);
     }
   };
-  console.log(update);
   return (
     <div className="grow rounded-md border border-gold p-4">
       <p className="mb-2 font-thin capitalize">update seat count</p>

@@ -1,9 +1,13 @@
 /* eslint-disable no-unused-vars */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import UserIcon from "../assets/Usericon.png";
+import { data } from "autoprefixer";
+import TrackOrderCard from "./TrackOrderCard";
+import RserveCard from "./ReserveCard";
 /* eslint-disable react/prop-types */
 const UserPage = ({
+  _id,
   email,
   username,
   address,
@@ -11,6 +15,53 @@ const UserPage = ({
   setIslogedin,
   orders,
 }) => {
+  const [userorders, setUserOrders] = useState([]);
+  const [userRes, setUserRes] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await fetch("http://localhost:8080/getuserorders", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            _id: _id,
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          console.log(data);
+          return;
+        }
+        setUserOrders(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getResData = async () => {
+      try {
+        const res = await fetch("http://localhost:8080/getuserres", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            _id: _id,
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          console.log(data);
+          return;
+        }
+        setUserRes(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+    getResData();
+  }, []);
+  console.log(userRes);
   const claer = () => {
     window.sessionStorage.removeItem("userData");
   };
@@ -55,16 +106,29 @@ const UserPage = ({
           </button>
         </div>
       </div>
-      <div>
-        {orders.length > 0 ? (
-          <div></div>
-        ) : (
-          <div className="grid h-[50dvh] w-full place-items-center">
-            <h2 className="text-5xl font-bold uppercase text-slate-300">
-              no orders yet
-            </h2>
-          </div>
-        )}
+      <div className="flex w-full flex-col gap-6 xl:flex-row">
+        <div className="mb-4 grid w-1/2">
+          {orders.length > 0 ? (
+            userorders.map((data, i) => <TrackOrderCard key={i} {...data} />)
+          ) : (
+            <div className="grid h-[50dvh] w-full place-items-center">
+              <h2 className="text-5xl font-bold uppercase text-slate-300">
+                no orders yet
+              </h2>
+            </div>
+          )}
+        </div>
+        <div className="mb-4 grid w-1/2">
+          {orders.length > 0 ? (
+            userRes.map((data, i) => <RserveCard key={i} {...data} />)
+          ) : (
+            <div className="grid h-[50dvh] w-full place-items-center">
+              <h2 className="text-5xl font-bold uppercase text-slate-300">
+                no orders yet
+              </h2>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

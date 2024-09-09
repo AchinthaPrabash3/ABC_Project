@@ -2,13 +2,18 @@
 
 import { useContext, useEffect, useState } from "react";
 import CartCard from "../components/CartItemCard";
-
 import PageTop from "../components/PageTop";
 import TrackOrders from "../components/TrackOrders";
 import { LocationContext } from "../components/LocationContext";
+import { SaveOrdersContext } from "../components/SaveToLocalContext";
+import { LoginContext } from "../components/LoginContext";
 
-const Cart = ({ data, setCart, setSaveToLocal }) => {
+const Cart = ({ data, setCart }) => {
   const locations = useContext(LocationContext);
+  const { setSaveToLocal } = useContext(SaveOrdersContext);
+  const { isLogedin, reseved } = useContext(LoginContext);
+  const [subTotal, setSubtotal] = useState(0);
+  const [total, setTotal] = useState(0);
   const [orderData, setorderData] = useState({
     items: [],
     total: 0,
@@ -19,8 +24,7 @@ const Cart = ({ data, setCart, setSaveToLocal }) => {
     completed: false,
     delivary: 300,
   });
-  const [subTotal, setSubtotal] = useState(0);
-  const [total, setTotal] = useState(0);
+
   useEffect(() => {
     let sTotal = 0;
     for (let i = 0; i < data.length; i++) {
@@ -48,6 +52,28 @@ const Cart = ({ data, setCart, setSaveToLocal }) => {
         [name]: value,
       };
     });
+  };
+
+  const updateUserInfo = async (prodId) => {
+    if (isLogedin) {
+      try {
+        const res = await fetch("http://localhost:8080/upuserprod", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify([reseved[0]._id, prodId]),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          console.log(data);
+          return;
+        }
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("m");
+    }
   };
 
   const sendData = async (e) => {
@@ -78,7 +104,7 @@ const Cart = ({ data, setCart, setSaveToLocal }) => {
           setSaveToLocal((s) => {
             return [...s, data];
           });
-          window.localStorage.setItem("orders", JSON.stringify(orderData));
+          updateUserInfo(data._id);
           setorderData({
             items: [],
             total: 0,
@@ -194,7 +220,7 @@ const Cart = ({ data, setCart, setSaveToLocal }) => {
         <p className="mt-4 border-b border-gold py-3 text-center text-3xl uppercase">
           your orders
         </p>
-        <div>
+        <div className="mx-auto w-[80%]">
           <TrackOrders />
         </div>
       </section>

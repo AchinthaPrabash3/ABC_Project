@@ -4,10 +4,10 @@ import { PiBowlFood } from "react-icons/pi";
 
 const AboutCard = ({ icon, title, des }) => {
   return (
-    <div className="w-[250px] h-[200px] flex flex-col items-center text-white justify-center">
-      <div className="*:size-16 text-gold">{icon}</div>
-      <h1 className="font-cormorant capitalize text-xl font-bold">{title}</h1>
-      <p className="text-center text-xs w-[200px]">{des}</p>
+    <div className="flex h-[200px] w-[70%] flex-col items-center justify-center text-white lg:w-[250px]">
+      <div className="text-gold *:size-24 lg:*:size-16">{icon}</div>
+      <h1 className="font-cormorant text-xl font-bold capitalize">{title}</h1>
+      <p className="w-[200px] text-center text-xs">{des}</p>
     </div>
   );
 };

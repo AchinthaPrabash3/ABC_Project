@@ -19,7 +19,6 @@ const TrackOrders = () => {
     };
     getSave();
   }, []);
-
   useEffect(() => {
     const sendData = async () => {
       try {
@@ -47,9 +46,15 @@ const TrackOrders = () => {
   }, [savedOrders]);
 
   return (
-    <div className="mx-auto my-4 grid w-fit grid-cols-2 gap-3">
+    <div className="mx-auto my-4 grid w-full gap-3 xl:grid-cols-2">
       {reseved.map((data, i) => (
-        <TrackOrderCard key={i} {...data} />
+        <TrackOrderCard
+          key={i}
+          {...data}
+          setSavedOrders={setSavedOrders}
+          index={i}
+          allData={savedOrders}
+        />
       ))}
     </div>
   );

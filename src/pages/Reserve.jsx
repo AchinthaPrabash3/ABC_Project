@@ -7,9 +7,14 @@ import { LiaPizzaSliceSolid } from "react-icons/lia";
 import { CiCircleCheck } from "react-icons/ci";
 import { AiOutlineHistory } from "react-icons/ai";
 import { LocationContext } from "../components/LocationContext";
+import RserveCard from "../components/ReserveCard";
+import { SaveResContext } from "../components/ResrveContext";
+import { LoginContext } from "../components/LoginContext";
 
 const ReservePage = () => {
   const locations = useContext(LocationContext);
+  const { savedReserves, setSavedReserves } = useContext(SaveResContext);
+  const { isLogedin, reseved } = useContext(LoginContext);
   const miniCardData = [
     { title: "fresh food", icon: <LiaPizzaSliceSolid /> },
     { title: "fast delivery", icon: <LuTruck /> },
@@ -37,6 +42,27 @@ const ReservePage = () => {
       };
     });
   };
+  const updateUserInfo = async (resId) => {
+    if (isLogedin) {
+      try {
+        const res = await fetch("http://localhost:8080/upuserres", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify([reseved[0]._id, resId]),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          console.log(data);
+          return;
+        }
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("m");
+    }
+  };
 
   const sendData = async (e) => {
     e.preventDefault();
@@ -59,10 +85,16 @@ const ReservePage = () => {
           body: JSON.stringify(reserveData),
         });
         const data = await req.json();
-        window.alert(data);
+        window.alert(data[0]);
         if (!req.ok) {
           console.log(data);
           return;
+        }
+        if (data[1] !== "false") {
+          setSavedReserves((r) => {
+            return [...r, { ...reserveData, _id: data[1] }];
+          });
+          updateUserInfo(data[1]);
         }
       } catch (error) {
         console.log(error);
@@ -71,25 +103,24 @@ const ReservePage = () => {
       window.alert("fill data");
     }
   };
-
   return (
     <>
       <PageTop name="reserve" />
-      <section className="flex justify-center space-x-20 py-6">
-        <div className="">
+      <section className="flex w-full flex-col-reverse items-center justify-center gap-6 py-6 lg:flex-row lg:space-x-12">
+        <div className="flex w-full flex-col items-center px-20 lg:w-fit lg:items-start lg:px-0">
           <p className="w-fit border-b border-t border-gold pb-0.5 pt-1.5 font-Josefin text-sm uppercase leading-none">
             reservation
           </p>
           <h1 className="mt-4 font-cormorant text-4xl capitalize">
             reserve your table now
           </h1>
-          <p className="mb-4 mt-1 w-[300px] text-xs">
+          <p className="mb-4 mt-1 w-[300px] text-center text-xs lg:text-left">
             The people, food and the prime locations make Rodich the perfect
             place good friends & family to come together and have great time.
           </p>
           <form
             action=""
-            className="flex w-[480px] flex-col space-y-2 [&_input]:h-12 [&_input]:border-2 [&_input]:border-gold [&_input]:pl-2 [&_input]:font-Josefin [&_input]:placeholder:capitalize"
+            className="flex w-full grow flex-col space-y-2 lg:w-[480px] [&_input]:h-12 [&_input]:border-2 [&_input]:border-gold [&_input]:pl-2 [&_input]:font-Josefin [&_input]:placeholder:capitalize"
           >
             <input
               type="email"
@@ -165,11 +196,19 @@ const ReservePage = () => {
             reserve the table
           </button>
         </div>
-        <img src={reserveImg} className="h-[520px] w-1/3 object-cover" />
+
+        <img
+          src={reserveImg}
+          className="h-[400px] w-full bg-red-500 object-cover lg:h-[520px] lg:w-1/3"
+        />
       </section>
-      <section className="mb-10 mt-20 flex items-center justify-center space-x-20">
-        <img src={resimg} alt="" className="aspect-square w-1/3" />
-        <div>
+      <section className="mb-10 mt-20 flex flex-col items-center justify-center lg:flex-row lg:space-x-20">
+        <img
+          src={resimg}
+          alt=""
+          className="aspect-square h-[200px] w-full object-cover lg:h-fit lg:w-1/3"
+        />
+        <div className="flex flex-col items-center">
           <p className="w-fit border-b border-t border-gold pb-1.5 pt-2.5 font-Josefin text-sm uppercase leading-none">
             why choose us
           </p>
@@ -196,6 +235,11 @@ const ReservePage = () => {
             ))}
           </div>
         </div>
+      </section>
+      <section className="mx-auto grid w-[80%] gap-5 xl:grid-cols-2">
+        {savedReserves.map((data, i) => (
+          <RserveCard key={i} {...data} />
+        ))}
       </section>
     </>
   );

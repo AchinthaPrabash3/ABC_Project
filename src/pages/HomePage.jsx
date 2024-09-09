@@ -5,20 +5,37 @@ import HeroSection from "../components/HeroSection";
 import ItemCard from "../components/ItemCard";
 import OfferCard from "../components/OfferCard";
 import Reserve from "../components/ReserveForm";
-import { data } from "../data/DummyData";
 
 import { MdOutlineDeliveryDining, MdOutlineMenuBook } from "react-icons/md";
 import { LiaCalendarDaySolid } from "react-icons/lia";
+import { useEffect, useState } from "react";
 
 const HomePage = ({ setCart }) => {
+  const [prod, setprod] = useState([]);
   const offersData = [
     { title: "open all week", icon: <LiaCalendarDaySolid /> },
     { title: "diverse menu", icon: <MdOutlineMenuBook /> },
     { title: "home delivery", icon: <MdOutlineDeliveryDining /> },
   ];
+  useEffect(() => {
+    const getAllProd = async () => {
+      try {
+        const res = await fetch("http://localhost:8080/getallprod");
+        const data = await res.json();
+        if (!res.ok) {
+          console.log(data);
+          return;
+        }
+        setprod(data.filter((data) => data.tag == "main"));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAllProd();
+  }, []);
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <HeroSection />
       <section className="pt-20 lg:pt-24 xl:pt-[140px]">
         <div className="flex flex-col items-center md:pb-12 xl:pb-[84px]">
@@ -30,8 +47,8 @@ const HomePage = ({ setCart }) => {
             letters, as opposed to using 'Content here, content making.
           </p>
         </div>
-        <div className="mx-auto grid w-fit gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {data.map((data, i) => {
+        <div className="mx-auto grid w-fit place-content-center gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {prod.map((data, i) => {
             return i < 4 ? (
               <ItemCard key={i} {...data} setCart={setCart} />
             ) : (

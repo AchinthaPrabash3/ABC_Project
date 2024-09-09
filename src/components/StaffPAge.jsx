@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import OrderCard from "./OrderCard";
 import RserveCard from "./ReserveCard";
+import StaffOrderStats from "./StaffOrderStats";
 
 /* eslint-disable react/prop-types */
 const StaffPage = ({ setIsLogedinStaff }) => {
@@ -11,7 +12,6 @@ const StaffPage = ({ setIsLogedinStaff }) => {
   const [reserves, setReserves] = useState([]);
   const [completed, setCompleted] = useState([]);
   const [pending, setPending] = useState([]);
-  const [total, setTotal] = useState([]);
   const [m, setm] = useState([]);
 
   useEffect(() => {
@@ -27,12 +27,7 @@ const StaffPage = ({ setIsLogedinStaff }) => {
   useEffect(() => {
     setCompleted(orders.filter(({ completed }) => completed != false));
     setPending(orders.filter(({ completed }) => completed != true));
-    let total = 0;
-    for (let i = 0; i < completed.length; i++) {
-      total += completed[i].total;
-    }
-    setTotal(total);
-  }, []);
+  }, [orders]);
 
   useEffect(() => {
     const getOrders = async (e) => {
@@ -59,6 +54,7 @@ const StaffPage = ({ setIsLogedinStaff }) => {
       getOrders();
     }
   }, [m]);
+
   useEffect(() => {
     const getReserves = async () => {
       try {
@@ -76,6 +72,7 @@ const StaffPage = ({ setIsLogedinStaff }) => {
           console.log(data);
           return;
         }
+
         setReserves(data);
       } catch (error) {
         console.log(error);
@@ -85,7 +82,7 @@ const StaffPage = ({ setIsLogedinStaff }) => {
       getReserves();
     }
   }, [m]);
-  console.log(total);
+
   return (
     <div>
       <div className="flex items-center justify-between border-b-2 border-main px-12 py-4">
@@ -118,15 +115,29 @@ const StaffPage = ({ setIsLogedinStaff }) => {
             />
           </svg>
         </button>
-      </div>
-      <div className="flex gap-2 px-3 pt-5">
-        <div className="h-[600px] w-1/2 flex-none space-y-2 overflow-y-scroll pb-4">
-          {orders.map((data, i) =>
-            data.completed == false ? <OrderCard key={i} {...data} /> : "",
-          )}
+      </div>{" "}
+      <StaffOrderStats pending={pending} completed={completed} />
+      <div className="mb-5 flex flex-col gap-5 px-3 pt-5 xl:flex-row">
+        <div className="w-full rounded-md border border-gold p-2 xl:w-1/2">
+          <h2 className="mb-4 font-Josefin text-xl capitalize">
+            pending orders
+          </h2>
+          <div className="h-[600px] flex-none space-y-2 overflow-y-scroll pb-4">
+            {orders.map((data, i) =>
+              data.completed == false ? <OrderCard key={i} {...data} /> : "",
+            )}
+          </div>
         </div>
-        <div className="h-12 w-1/2">
-          <RserveCard />
+        <div className="w-full rounded-md border border-gold p-2 xl:w-1/2">
+          <h2 className="mb-4 font-Josefin text-xl capitalize">
+            today reservations
+          </h2>
+          <div className="h-[600px] flex-none space-y-2 overflow-y-scroll pb-4">
+            {" "}
+            {reserves.map((data, i) => (
+              <RserveCard key={i} {...data} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

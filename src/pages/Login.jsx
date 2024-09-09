@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
 
 import PageTop from "../components/PageTop";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import UserPage from "../components/UserPage";
+
+import { LoginContext } from "../components/LoginContext";
 
 const LoginPage = () => {
   const [loginData, seLoginData] = useState({
     email: "",
     password: "",
   });
-  const [reseved, setReseved] = useState([]);
-  const [isLogedin, setIslogedin] = useState(false);
+  const { reseved, setReseved } = useContext(LoginContext);
+  const { isLogedin, setIslogedin } = useContext(LoginContext);
 
   const getData = (e) => {
     const { name, value } = e.target;
@@ -47,33 +49,7 @@ const LoginPage = () => {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    const data = window.sessionStorage.getItem("isLogedin");
-    if (data !== null) {
-      setIslogedin(JSON.parse(data));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (reseved.length !== 0) {
-      window.sessionStorage.setItem("userData", JSON.stringify(reseved));
-    }
-  }, [reseved]);
-
-  useEffect(() => {
-    const userData = window.sessionStorage.getItem("userData");
-    if (userData !== null) {
-      setReseved(JSON.parse(userData));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (reseved.length !== 0) {
-      window.sessionStorage.setItem("isLogedin", JSON.stringify(isLogedin));
-    }
-  }, [reseved, isLogedin]);
-
+  console.log(loginData);
   return (
     <>
       {isLogedin == false ? (

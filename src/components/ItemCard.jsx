@@ -34,7 +34,10 @@ const ItemCard = ({ name, img, price, description, setCart }) => {
 
   return (
     <div className="w-[300px] 2xl:w-[350px]">
-      <img src={img} className="aspect-square w-full rounded-md" />
+      <img
+        src={img}
+        className="aspect-square w-full rounded-md border border-gold object-cover"
+      />
       <div className="mt-2 flex justify-between">
         <div className="*:leading-none">
           <h3 className="font-Josefin text-2xl font-semibold capitalize leading-none 2xl:text-4xl 2xl:leading-none">
@@ -63,14 +66,14 @@ const ItemCard = ({ name, img, price, description, setCart }) => {
                 />
               </svg>
             </button>
-            <div className="w-[44px] rounded-md border-2 border-gold overflow-hidden flex-none ">
+            <div className="w-[44px] flex-none overflow-hidden rounded-md border-2 border-gold">
               <input
                 value={value}
                 readOnly
                 type="number"
                 min="1"
                 max="10"
-                className="w-fit leading-none bg-transparent text-center font-cormorant text-3xl font-bold uppercase outline-none cursor-pointer"
+                className="w-fit cursor-pointer bg-transparent text-center font-cormorant text-3xl font-bold uppercase leading-none outline-none"
               />
             </div>
             <button onClick={remove}>

@@ -22,8 +22,8 @@ const Footer = () => {
           </a>
         ))}
       </ul>
-      <div className="mx-auto mb-20 mt-10 flex w-[700px] justify-between">
-        <div>
+      <div className="mx-auto mb-20 mt-10 flex flex-col items-center justify-between gap-12 lg:w-[700px] lg:flex-row">
+        <div className="flex flex-col items-center *:text-center lg:items-start lg:*:text-left">
           <h5 className="w-fit border-b border-t border-gold pb-1 pt-2.5 font-Josefin uppercase leading-none text-white">
             contact
           </h5>
@@ -35,7 +35,7 @@ const Footer = () => {
             <li className="text-gold">achinthaprabash3@gmail.com</li>
           </ul>
         </div>
-        <div className="flex flex-col items-end">
+        <div className="flex flex-col items-center *:text-center lg:items-end lg:*:text-left">
           <h5 className="w-fit border-b border-t border-gold pb-1 pt-2.5 font-Josefin uppercase leading-none text-white">
             working hours
           </h5>

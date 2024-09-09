@@ -1,8 +1,12 @@
 import { useContext, useState } from "react";
 import { LocationContext } from "./LocationContext";
+import { SaveResContext } from "./ResrveContext";
+import { LoginContext } from "./LoginContext";
 
 const Reserve = () => {
   const locations = useContext(LocationContext);
+  const { setSavedReserves } = useContext(SaveResContext);
+  const { isLogedin, reseved } = useContext(LoginContext);
   const [reserveData, setReserveData] = useState({
     email: "",
     name: "",
@@ -13,6 +17,28 @@ const Reserve = () => {
     peopleCount: 1,
     request: "",
   });
+
+  const updateUserInfo = async (resId) => {
+    if (isLogedin) {
+      try {
+        const res = await fetch("http://localhost:8080/upuserres", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify([reseved[0]._id, resId]),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          console.log(data);
+          return;
+        }
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("m");
+    }
+  };
 
   const getData = (e) => {
     const { name, value, type } = e.target;
@@ -44,10 +70,16 @@ const Reserve = () => {
           body: JSON.stringify(reserveData),
         });
         const data = await req.json();
-        window.alert(data);
+        window.alert(data[0]);
         if (!req.ok) {
           console.log(data);
           return;
+        }
+        if (data[1] !== "false") {
+          setSavedReserves((r) => {
+            return [...r, { ...reserveData, _id: data[1] }];
+          });
+          updateUserInfo(data[1]);
         }
       } catch (error) {
         console.log(error);
@@ -58,18 +90,15 @@ const Reserve = () => {
   };
   return (
     <section className="bg-formbg bg-cover">
-      <div className="flex w-full items-center justify-center bg-main/50 py-[120px]">
-        <div className="w-full rounded-lg bg-main/90 px-8 pb-12 pt-12 text-white shadow-xl backdrop-blur-sm md:w-fit md:pt-20 lg:px-12 xl:px-[156px] xl:pb-[121px]">
+      <div className="flex w-full items-center justify-center bg-main/50 px-10 py-[120px]">
+        <div className="flex-none grow rounded-lg bg-main/90 px-8 pb-12 pt-12 text-white shadow-xl backdrop-blur-sm md:w-fit md:pt-20 lg:grow-0 lg:px-12 xl:px-[156px] xl:pb-[121px]">
           <p className="mx-auto w-fit border-b border-t border-gold py-1 pt-2.5 text-center font-Josefin uppercase leading-none tracking-widest">
             reservation
           </p>
           <h4 className="mb-5 mt-2 text-center font-cormorant text-3xl capitalize">
             book your table now
           </h4>
-          <form
-            action=""
-            className="space-y-4 [&_input]:h-[68px] [&_input]:border-2 [&_input]:bg-transparent [&_input]:pl-3 [&_input]:font-Josefin [&_input]:text-xl [&_input]:text-white [&_input]:placeholder:capitalize [&_input]:placeholder:text-white2"
-          >
+          <form className="w-full space-y-4 [&_input]:h-[68px] [&_input]:border-2 [&_input]:bg-transparent [&_input]:pl-3 [&_input]:font-Josefin [&_input]:text-xl [&_input]:text-white [&_input]:placeholder:capitalize [&_input]:placeholder:text-white2">
             <input
               required
               type="email"
