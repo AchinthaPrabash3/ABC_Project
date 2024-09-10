@@ -5,7 +5,6 @@ import NavBar from "../components/NavBar";
 import PageTop from "../components/PageTop";
 import Reserve from "../components/ReserveForm";
 import SpacerImg from "../components/SpacerImg";
-import { menudata } from "../data/DummyData";
 import { useEffect, useState } from "react";
 const MenuPage = () => {
   const [products, setProducts] = useState([]);

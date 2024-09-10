@@ -57,6 +57,16 @@ const UpdateProd = () => {
           console.log(data);
           return;
         }
+        if (data) {
+          window.alert("product " + updateData.updateProperty + " updated");
+          setUpdateData({
+            _id: "",
+            updateProperty: "",
+            newValue: "",
+          });
+        } else {
+          window.alert("somthing went wrong");
+        }
       } catch (error) {
         console.log(error);
       }

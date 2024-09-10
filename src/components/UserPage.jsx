@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 
 import { useEffect, useState } from "react";
@@ -61,7 +62,6 @@ const UserPage = ({
     getData();
     getResData();
   }, []);
-  console.log(userRes);
   const claer = () => {
     window.sessionStorage.removeItem("userData");
   };
@@ -107,9 +107,16 @@ const UserPage = ({
         </div>
       </div>
       <div className="flex w-full flex-col gap-6 xl:flex-row">
-        <div className="mb-4 grid w-1/2">
+        <div className="mb-4 w-1/2 rounded-md border border-gold p-4">
+          <h2 className="mb-3 font-Josefin text-xl font-medium capitalize">
+            user Orders
+          </h2>
           {orders.length > 0 ? (
-            userorders.map((data, i) => <TrackOrderCard key={i} {...data} />)
+            <div className="flex h-[700px] flex-col gap-4 overflow-y-scroll">
+              {userorders.map((data, i) => (
+                <TrackOrderCard key={i} {...data} />
+              ))}
+            </div>
           ) : (
             <div className="grid h-[50dvh] w-full place-items-center">
               <h2 className="text-5xl font-bold uppercase text-slate-300">
@@ -118,13 +125,20 @@ const UserPage = ({
             </div>
           )}
         </div>
-        <div className="mb-4 grid w-1/2">
+        <div className="mb-4 w-1/2 rounded-md border border-gold p-4">
+          <h2 className="mb-3 font-Josefin text-xl font-medium capitalize">
+            upcoming reservation
+          </h2>
           {orders.length > 0 ? (
-            userRes.map((data, i) => <RserveCard key={i} {...data} />)
+            <div className="flex h-[500px] flex-col gap-4 overflow-y-scroll">
+              {userRes.map((data, i) => (
+                <RserveCard key={i} {...data} />
+              ))}
+            </div>
           ) : (
             <div className="grid h-[50dvh] w-full place-items-center">
               <h2 className="text-5xl font-bold uppercase text-slate-300">
-                no orders yet
+                no reservations yet
               </h2>
             </div>
           )}

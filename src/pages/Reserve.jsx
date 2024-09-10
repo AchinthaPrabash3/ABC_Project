@@ -236,10 +236,15 @@ const ReservePage = () => {
           </div>
         </div>
       </section>
-      <section className="mx-auto grid w-[80%] gap-5 xl:grid-cols-2">
-        {savedReserves.map((data, i) => (
-          <RserveCard key={i} {...data} />
-        ))}
+      <section className="mb-3">
+        <h2 className="uppercse mb-6 border-b-2 border-black text-center font-Josefin uppercase">
+          your reservation
+        </h2>
+        <div className="mx-auto grid w-[80%] gap-5 xl:grid-cols-2">
+          {savedReserves.map((data, i) => (
+            <RserveCard key={i} {...data} />
+          ))}
+        </div>
       </section>
     </>
   );

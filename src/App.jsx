@@ -30,21 +30,6 @@ function App() {
     }
   }, [cart]);
 
-  const [saveToLocal, setSaveToLocal] = useState([]);
-
-  useEffect(() => {
-    const data = window.localStorage.getItem("orders");
-    if (data !== null) {
-      setSaveToLocal(JSON.parse(data));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (saveToLocal.length !== 0) {
-      window.localStorage.setItem("orders", JSON.stringify(saveToLocal));
-    }
-  }, [saveToLocal]);
-
   return (
     <ContextProvider>
       <Router>
@@ -58,14 +43,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route
             path="/cart"
-            element={
-              <Cart
-                data={cart}
-                setCart={setCart}
-                setSaveToLocal={setSaveToLocal}
-                saveToLocal={saveToLocal}
-              />
-            }
+            element={<Cart data={cart} setCart={setCart} />}
           />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/staff" element={<StaffPanel cart={cart} />} />
